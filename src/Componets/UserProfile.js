@@ -1,5 +1,6 @@
 import React from "react";
 import "./UserProfile.css";
+
 function UserProfile({name, photoURL}) {
   return <div className="user-profile">
     {/* user image */}

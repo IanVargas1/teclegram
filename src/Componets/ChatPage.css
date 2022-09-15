@@ -1,0 +1,43 @@
+.chatpage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #d7dbd6;
+    z-index: 100;
+    position: relative;
+}
+
+.chatpage::before{
+    width: 100vw;
+    height: 222px;
+    background: #0073f8;
+    background: -webkit-linear-gradient(to top, #0073f8, #00d7dc);
+    background: linear-gradient(to top, #0073f8, #00d7dc);
+    position: absolute;
+    z-index: -1;
+    content: "";
+    top: 0;
+}
+
+.chatpage-container{
+    width: 100%;
+    height: 100%;
+    max-width: 1366px;
+    z-index: 100;
+    display: flex;
+}
+
+@media only screen and (min-width: 1367px){
+    .chatpage-container{
+        height: 95%;
+    }
+}
+/* COLORS
+
+  #00d7dc
+! #ff61c4
+? #0073f8
+*/

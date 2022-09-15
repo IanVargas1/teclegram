@@ -10,10 +10,44 @@
     position: relative;
 }
 
+.home::before{
+    width: 100vw;
+    height: 222px;
+    background: #0073f8;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #0073f8, #00d7dc);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #0073f8, #00d7dc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    position: absolute;
+    z-index: -1;
+    content: "";
+    top: 0;
+}
+
 .home-container {
     width: 100%;
     height: 100%;
-    max-width: 1600px;
+    max-width: 1366px;
     z-index: 100;
     display: flex;
+}
+
+.home-bg{
+    flex: 1;
+    background-color: #fafafa;
+    z-index: 100;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-bg > img{
+    width: 300px;
+    margin: auto;
+}
+
+@media only screen and (min-width: 1367px){
+    .home-container{
+        height: 95%;
+    }
 }

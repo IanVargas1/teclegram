@@ -6,6 +6,10 @@ function Home() {
     <div className="home-container">
       {/* SideBar */}
        <Sidebar />
+       {/* Application logo */}
+       <div className="home-bg">
+        <img src="./login.png" alt="" />
+       </div>
     </div>
   </div>;
 }

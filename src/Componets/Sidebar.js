@@ -28,6 +28,24 @@ function Sidebar() {
         <UserProfile name="JeanK" photoURL="./user.png" />
         <UserProfile name="Julio lopez" photoURL="./user.png" />
         <UserProfile name="Ian Vargas" photoURL="./user.png" />
+        <UserProfile name="Naraku" photoURL="./user.png" />
+        <UserProfile name="jarol" photoURL="./user.png" />
+        <UserProfile name="brincolin" photoURL="./user.png" />
+        <UserProfile name="Julio lopez" photoURL="./user.png" />
+        <UserProfile name="Ian Vargas" photoURL="./user.png" />
+        <UserProfile name="Naraku" photoURL="./user.png" />
+        <UserProfile name="jarol" photoURL="./user.png" />
+        <UserProfile name="brincolin" photoURL="./user.png" />
+        <UserProfile name="Julio lopez" photoURL="./user.png" />
+        <UserProfile name="Ian Vargas" photoURL="./user.png" />
+        <UserProfile name="Naraku" photoURL="./user.png" />
+        <UserProfile name="jarol" photoURL="./user.png" />
+        <UserProfile name="brincolin" photoURL="./user.png" />
+        <UserProfile name="Julio lopez" photoURL="./user.png" />
+        <UserProfile name="Ian Vargas" photoURL="./user.png" />
+        <UserProfile name="Naraku" photoURL="./user.png" />
+        <UserProfile name="jarol" photoURL="./user.png" />
+        <UserProfile name="brincolin" photoURL="./user.png" />
       </div>
     </div>
   );
