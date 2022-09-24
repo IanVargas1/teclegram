@@ -10,10 +10,10 @@
 
 .login::before{
     width: 100vw;
-    height: 222px;
-    background: #0073f8;
-    background: -webkit-linear-gradient(to top, #0073f8, #00d7dc); 
-    background: linear-gradient(to top, #0073f8, #00d7dc); 
+    height: 100vh;
+    background: #00d7dc;
+    background: -webkit-linear-gradient(to top, #00d7dc, #ff61c4); 
+    background: linear-gradient(to top, #00d7dc, #ff61c4); 
     position: absolute;
     top: 0;
     content: "";
