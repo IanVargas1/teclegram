@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login({ setUser }) {
-  console.log("asdasdaa");
   const navigate = useNavigate();
   const signInWithGoogle = () => {
-    console.log("asd");
     auth
       .signInWithPopup(googleProvider)
       .then((result) => {
@@ -18,7 +16,7 @@ function Login({ setUser }) {
         };
         navigate("/");
         setUser(newUser);
-
+        localStorage.setItem("user", JSON.stringify(newUser));
         db.collection("users").doc(result.user.email).set(newUser);
       })
       .catch((err) => alert(err.message));

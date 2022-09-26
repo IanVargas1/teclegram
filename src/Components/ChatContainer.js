@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatContainer.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -6,11 +6,24 @@ import SendIcon from "@mui/icons-material/Send";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import ChatMessage from "./ChatMessage";
 import Picker from "emoji-picker-react";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 function ChatContainer() {
   const [message, setMessage] = useState("");
   const [openEmojiBox, setOpenemojiBox] = useState(false);
-
+  const { emailID } = useParams();
+  console.log("asd", emailID);
+  useEffect(() => {
+    const getUser = async () => {
+      const data = await db
+        .collection("users")
+        .doc(emailID)
+        .onSnapshot((snapshot) => {
+          console.log(snapshot.data());
+        });
+    };
+  }, []);
   return (
     <div className="chat-container">
       <div className="chat-container-header">
@@ -26,19 +39,6 @@ function ChatContainer() {
       </div>
       {/* chat display container */}
       <div className="chat-display-container">
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
-        <ChatMessage message="hello, how are you?" time="17-9-2022" />
         <ChatMessage message="hello, how are you?" time="17-9-2022" />
         <ChatMessage message="hello, how are you?" time="17-9-2022" />
       </div>
