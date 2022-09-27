@@ -62,7 +62,6 @@ function Sidebar({ currentUser, signOut }) {
         </div>
 
         <div className="sidebar-header-btn">
-          <TollIcon />
           <ChatIcon />
           <MoreVertIcon />
         </div>

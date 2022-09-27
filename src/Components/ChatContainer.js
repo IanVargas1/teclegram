@@ -56,9 +56,11 @@ function ChatContainer({ currentUser }) {
     });
   }, [chatMessages]);
 
+
   const send = (e) => {
     e.preventDefault();
-    if (emailID) {
+    if (emailID && !!message) {
+      
       let playload = {
         text: message,
         senderEmail: currentUser.email,
