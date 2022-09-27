@@ -27,4 +27,12 @@
 .user-name {
     text-transform: capitalize;
     font-size: 15px;
+    /* margin-bottom: 0px; */
+}
+
+.user-last-message{
+    font-size: 13px;
+    margin-left: 1px;
+    margin-top: 2px;
+    color: gray;
 }

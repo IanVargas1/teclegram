@@ -2,15 +2,15 @@ import React from "react";
 import ChatContainer from "./ChatContainer";
 import Sidebar from "./Sidebar";
 import "./ChatPage.css";
-function ChatPage() {
+function ChatPage({ currentUser, signOut }) {
   return (
     <div className="chatpage">
       <div className="chatpage-container">
         {/* sidebar */}
-        <Sidebar />
+        <Sidebar currentUser={currentUser} signOut={signOut} />
 
         {/* chat container */}
-        <ChatContainer />
+        <ChatContainer currentUser={currentUser}/>
       </div>
     </div>
   );
