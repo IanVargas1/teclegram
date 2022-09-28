@@ -9,6 +9,7 @@ import Picker from "emoji-picker-react";
 import { useParams } from "react-router-dom";
 import db from "../firebase";
 import firebase from "firebase";
+import {v4} from 'uuid';
 
 function ChatContainer({ currentUser }) {
   const [message, setMessage] = useState("");
@@ -56,10 +57,13 @@ function ChatContainer({ currentUser }) {
     });
   }, [chatMessages]);
 
+  //* function to send text messages and store them in the db
   const send = (e) => {
     e.preventDefault();
     if (emailID && !!message && message !== " ") {
+      var cod = v4()
       let playload = {
+        id: cod,
         text: message,
         senderEmail: currentUser.email,
         reciverEmail: emailID,
@@ -117,9 +121,11 @@ function ChatContainer({ currentUser }) {
       <div className="chat-display-container" ref={chatBox}>
         {chatMessages.map((message) => (
           <ChatMessage
+            id={message.id}
             message={message.text}
             time={message.timeStamp}
             sender={message.senderEmail}
+            emailID={emailID}
           />
         ))}
       </div>

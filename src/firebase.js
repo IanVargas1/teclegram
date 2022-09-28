@@ -21,3 +21,5 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export { auth, googleProvider };
 
 export default db;
+
+export const deleteMessage = id => console.log('id: ',id);
