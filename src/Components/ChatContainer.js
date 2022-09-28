@@ -56,18 +56,15 @@ function ChatContainer({ currentUser }) {
     });
   }, [chatMessages]);
 
-
   const send = (e) => {
     e.preventDefault();
-    if (emailID && !!message) {
-      
+    if (emailID && !!message && message !== " ") {
       let playload = {
         text: message,
         senderEmail: currentUser.email,
         reciverEmail: emailID,
         timeStamp: firebase.firestore.Timestamp.now(),
       };
-
       //data to the sender
       db.collection("chats")
         .doc(currentUser.email)
@@ -149,7 +146,7 @@ function ChatContainer({ currentUser }) {
             type="text"
             placeholder="Type a message"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value.trimStart())}
           />
         </form>
         {/* send message button */}
