@@ -4,7 +4,7 @@
     flex-direction: column;
     position: relative;
     width: fit-content;
-    max-width: 400px;
+    max-width: 500px;
     padding-right: 10px;
     padding-left: 10px;
     background-color: #00d7dc;
@@ -41,7 +41,8 @@
     font-size: 16px;
     cursor: pointer;
     color: #01f8fc;
-    margin-top: 4px;
+    margin-top: 2px;
+    margin-bottom: 5px;
     margin-right: -2px;
 }
 .img > .MuiSvgIcon-root:hover{
@@ -51,7 +52,7 @@
 }
 
 .img-message{
-    max-width: 400px;
+    max-width: 500px;
     margin-top: 10px;
 }
 
