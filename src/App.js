@@ -7,6 +7,7 @@ import ChatPage from "./Components/ChatPage";
 import { useState } from "react";
 import Login from "./Components/Login";
 import { auth } from "./firebase";
+import CalendarContainer from "./Components/CalendarContainer";
 function App() {
   /** routing for the pages */
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -36,6 +37,12 @@ function App() {
             <Route
               path="/upload/:emailID"
               element={<UploadPage currentUser={user} signOut={signOut} />}
+            />
+            <Route
+              path="/calendario"
+              element={
+                <CalendarContainer currentUser={user} signOut={signOut} />
+              }
             />
           </Routes>
         ) : (

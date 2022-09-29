@@ -4,7 +4,7 @@
     flex-direction: column;
     position: relative;
     width: fit-content;
-    max-width: 500px;
+    max-width: 400px;
     padding-right: 10px;
     padding-left: 10px;
     background-color: #00d7dc;
@@ -29,33 +29,3 @@
     position: absolute !important;
     top: -325px;
 }
-
-.img{
-    position: inherit;
-    display: flex;
-    align-self: flex-end;
-}
-
-
-.img > .MuiSvgIcon-root{
-    font-size: 16px;
-    cursor: pointer;
-    color: #01f8fc;
-    margin-top: 2px;
-    margin-bottom: 5px;
-    margin-right: -2px;
-}
-.img > .MuiSvgIcon-root:hover{
-    color: rgb(219, 86, 86);
-
-    
-}
-
-.img-message{
-    max-width: 500px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-/* #00d8dc */

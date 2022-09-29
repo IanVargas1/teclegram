@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./Sidebar.css";
 import UserProfile from "./UserProfile";
 import db from "../firebase";
+import { Button } from "@mui/material";
 
 function Sidebar({ currentUser, signOut }) {
   const [allUsers, setAllUsers] = useState([]);
@@ -52,6 +53,15 @@ function Sidebar({ currentUser, signOut }) {
     );
   });
 
+  function ocultar() {
+    var x = document.getElementById("menu-side");
+    if (x.style.display === "none") {
+      x.style.display = "flex";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -60,8 +70,24 @@ function Sidebar({ currentUser, signOut }) {
         </div>
 
         <div className="sidebar-header-btn">
-          <MoreVertIcon />
+          <Button id="btn" onClick={ocultar}>
+            <MoreVertIcon />
+          </Button>
         </div>
+      </div>
+      <div id="menu-side" class="menu-side" style={{ display: "none" }}>
+        <a class="link" href="#">
+          Estadisticas
+        </a>
+        <a class="link" href="#">
+          Tiempo y Clima
+        </a>
+        <a class="link" href="#">
+          Wikipedia
+        </a>
+        <a class="link" href="/calendario">
+          Calendario
+        </a>
       </div>
       <div className="sidebar-search">
         <div className="sidebar-search-input">

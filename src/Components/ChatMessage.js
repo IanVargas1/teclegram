@@ -2,9 +2,8 @@ import React from "react";
 import db, { auth, deleteMessage } from "../firebase";
 import "./ChatMessage.css";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
-function ChatMessage({ id, message, time, sender, emailID }) {
+function ChatMessage({ id, message, time, sender, emailID, type }) {
   const [doc1, setDoc1] = useState("");
   const [doc2, setDoc2] = useState("");
   const deleteMessage = async () => {
@@ -30,6 +29,7 @@ function ChatMessage({ id, message, time, sender, emailID }) {
         .onSnapshot((snapshot) => {
           snapshot.docs.map((doc) => {
             if (doc.data().id === id) {
+              console.log(doc);
               deleteDoc(doc, emailID);
             }
           });
@@ -72,8 +72,15 @@ function ChatMessage({ id, message, time, sender, emailID }) {
           marginTop: sender === auth?.currentUser?.email ? "-10px" : "",
         }}
       >
-        <img className="img-message"src={message} alt=""  />
-        <p>{message}</p>
+        {type === "video" ? (
+          <video controls className="img-message" src={message} alt="" />
+        ) : type === "imagen" ? (
+          <img className="img-message" src={message} alt="" />
+        ) : type === "audio" ? (
+          <audio controls className="img-message" src={message}></audio>
+        ) : (
+          <p>{message}</p>
+        )}
       </div>
       <div className="chat-message-date">
         <p>{new Date(time.toDate()).toLocaleString()}</p>

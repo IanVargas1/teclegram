@@ -21,6 +21,7 @@ function ChatContainer({ currentUser }) {
   const [chatUser, setChatUser] = useState({});
   const chatBox = useRef(null);
   const [chatMessages, setChatMessages] = useState([]);
+  const [fileType, setFileType] = useState([]);
   useEffect(() => {
     const getUser = async () => {
       const data = await db
@@ -70,6 +71,7 @@ function ChatContainer({ currentUser }) {
         senderEmail: currentUser.email,
         reciverEmail: emailID,
         timeStamp: firebase.firestore.Timestamp.now(),
+        type: fileType,
       };
       //data to the sender
       db.collection("chats")
@@ -101,11 +103,10 @@ function ChatContainer({ currentUser }) {
           photoURL: currentUser.photoURL,
           lastMessage: message,
         });
-
+      setFileType("");
       setMessage("");
     }
   };
-
 
   function ocultar() {
     var x = document.getElementById("menu").style;
@@ -160,6 +161,7 @@ function ChatContainer({ currentUser }) {
             time={message.timeStamp}
             sender={message.senderEmail}
             emailID={emailID}
+            type={message.type}
           />
         ))}
       </div>

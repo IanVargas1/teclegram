@@ -100,3 +100,27 @@
     border-radius: 20px;
     border: 2px solid #00d7dc;
 }
+
+#btn{
+    border-radius: 50%;
+    color: rgb(123, 123, 123);
+}
+
+.menu-side{
+    border-radius: 5px;
+    display: none;
+    flex-flow: column;
+    position: absolute;
+    margin-left: 230px;
+    margin-top: 50px;
+    width: 150px;
+    height: 135px;
+    background-color: #3ad7dabf;
+}
+
+.link{
+    margin-left: 0px;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+}
