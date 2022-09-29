@@ -4,17 +4,36 @@ import "./ChatMessage.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 function ChatMessage({ id, message, time, sender, emailID }) {
-  const deleteMessage = (e) => {
-    // e.preventDefault();
-    // console.log("email: ", emailID, auth?.currentUser?.email);
-    // console.log('cont mensaje:', message, time, sender);
-    console.log(
-      "hola >",
-      db.collection("chats").doc(auth?.currentUser?.email)
-      .collection("messages").onSnapshot((snapshot)=>snapshot.data())
-      .doc.data().id
-    );
-    // deleteMessage(id);
+  const deleteMessage = async () => {
+    //* Delete from sender
+    const data = await db
+      .collection("chats")
+      .doc(auth?.currentUser?.email)
+      .collection("messages")
+      .onSnapshot((snapshot) => {
+        let doc1;
+        snapshot.docs.map((doc) => {
+          if (doc.data().id === id) {
+            doc1 = doc;
+          }
+        });
+        console.log("jaja -", doc1.id);
+      });
+
+    //* Delete from reciver
+    const data2 = await db
+      .collection("chats")
+      .doc(emailID)
+      .collection("messages")
+      .onSnapshot((snapshot) => {
+        let doc1;
+        snapshot.docs.map((doc) => {
+          if (doc.data().id === id) {
+            doc1 = doc;
+          }
+        });
+        console.log("jaja2 -", doc1.id);
+      });
   };
 
   return (
@@ -25,7 +44,7 @@ function ChatMessage({ id, message, time, sender, emailID }) {
           sender === auth?.currentUser?.email ? "flex-end" : "flex-start",
 
         backgroundColor:
-          sender === auth?.currentUser?.email ? "#00d7dc" : "#fff",
+          sender === auth?.currentUser?.email ? "#01f8fc" : "#ffb3e3",
       }}
     >
       <div

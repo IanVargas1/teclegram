@@ -40,10 +40,14 @@
 .img > .MuiSvgIcon-root{
     font-size: 16px;
     cursor: pointer;
-    color: #00d7dc;
+    color: #01f8fc;
     margin-top: 4px;
     margin-right: -2px;
 }
 .img > .MuiSvgIcon-root:hover{
     color: rgb(219, 86, 86);
+
+    
 }
+
+/* #00d8dc */

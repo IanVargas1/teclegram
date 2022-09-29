@@ -35,7 +35,8 @@
 .sidebar-header-btn{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    margin-right: 10px;
     width: 150px;
     color: #51585c;
 }

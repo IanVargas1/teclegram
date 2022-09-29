@@ -36,12 +36,12 @@ function ChatContainer({ currentUser }) {
         .orderBy("timeStamp", "asc")
         .onSnapshot((snapshot) => {
           let messages = snapshot.docs.map((doc) => doc.data());
-
           let newMessage = messages.filter(
             (message) =>
-              message.senderEmail === (currentUser.email || emailID) ||
-              message.reciverEmail === (currentUser.email || emailID)
-          );
+            message.senderEmail === (currentUser.email || emailID) ||
+            message.reciverEmail === (currentUser.email || emailID)
+            );
+            
 
           setChatMessages(newMessage);
         });
@@ -113,9 +113,9 @@ function ChatContainer({ currentUser }) {
           </div>
           <p>{chatUser?.fullname}</p>
         </div>
-        <div className="chat-container-header-btn">
+        {/* <div className="chat-container-header-btn">
           <MoreVertIcon />
-        </div>
+        </div> */}
       </div>
       {/* chat display container */}
       <div className="chat-display-container" ref={chatBox}>
@@ -142,6 +142,7 @@ function ChatContainer({ currentUser }) {
         )}
 
         <div className="chat-input-btn">
+          
           <InsertEmoticonIcon onClick={() => setOpenemojiBox(!openEmojiBox)} />
           <AttachFileIcon />
         </div>

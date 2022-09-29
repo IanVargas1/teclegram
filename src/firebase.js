@@ -18,6 +18,7 @@ const db = app.firestore();
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+
 export { auth, googleProvider };
 
 export default db;
