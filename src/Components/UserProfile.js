@@ -18,7 +18,7 @@ function UserProfile({ name, photoURL, email, lastMessage }) {
       {/* user name */}
       <div className="user-info">
         <p className="user-name">{name}</p>
-        {lastMessage && (<p className="user-last-message">{lastMessage}</p>)}
+        {/* {lastMessage && (<p className="user-last-message">{lastMessage}</p>)} */}
       </div>
     </div>
   );

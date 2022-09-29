@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 
+import UploadPage from "./Components/UploadPage";
 import ChatPage from "./Components/ChatPage";
 import { useState } from "react";
 import Login from "./Components/Login";
@@ -31,6 +32,10 @@ function App() {
             <Route
               path="/"
               element={<Home currentUser={user} signOut={signOut} />}
+            />
+            <Route
+              path="/upload/:emailID"
+              element={<UploadPage currentUser={user} signOut={signOut} />}
             />
           </Routes>
         ) : (

@@ -29,30 +29,3 @@
     position: absolute !important;
     top: -325px;
 }
-
-.img{
-    position: inherit;
-    display: flex;
-    align-self: flex-end;
-}
-
-
-.img > .MuiSvgIcon-root{
-    font-size: 16px;
-    cursor: pointer;
-    color: #01f8fc;
-    margin-top: 4px;
-    margin-right: -2px;
-}
-.img > .MuiSvgIcon-root:hover{
-    color: rgb(219, 86, 86);
-
-    
-}
-
-.img-message{
-    max-width: 400px;
-    margin-top: 10px;
-}
-
-/* #00d8dc */

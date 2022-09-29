@@ -72,6 +72,7 @@ function ChatMessage({ id, message, time, sender, emailID }) {
           marginTop: sender === auth?.currentUser?.email ? "-10px" : "",
         }}
       >
+        <img className="img-message"src={message} alt=""  />
         <p>{message}</p>
       </div>
       <div className="chat-message-date">

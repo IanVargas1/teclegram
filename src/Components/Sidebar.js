@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TollIcon from "@mui/icons-material/Toll";
-import ChatIcon from "@mui/icons-material/Chat";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Sidebar.css";

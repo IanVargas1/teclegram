@@ -3,13 +3,16 @@ import "./ChatContainer.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import ChatMessage from "./ChatMessage";
 import Picker from "emoji-picker-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import db from "../firebase";
 import firebase from "firebase";
 import { v4 } from "uuid";
+import { uploadFile } from "../firebase";
+import Upload from "./Upload";
 
 function ChatContainer({ currentUser }) {
   const [message, setMessage] = useState("");
@@ -103,6 +106,38 @@ function ChatContainer({ currentUser }) {
     }
   };
 
+
+  function ocultar() {
+    var x = document.getElementById("menu").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "flex";
+    } else {
+      x.display = "none";
+    }
+  }
+
+  const [file, setfile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const changeS = (e) => {
+    setLoading(e);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await uploadFile(file);
+      changeS(result);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    }
+  };
+  const navigate = useNavigate();
+  const change = () => {
+    navigate(`/upload/${emailID}`);
+  };
+
   return (
     <div className="chat-container">
       <div className="chat-container-header">
@@ -142,7 +177,12 @@ function ChatContainer({ currentUser }) {
 
         <div className="chat-input-btn">
           <InsertEmoticonIcon onClick={() => setOpenemojiBox(!openEmojiBox)} />
-          <AttachFileIcon />
+          <AttachFileIcon onClick={ocultar} />
+          <div id="menu" className="menu" style={{ display: "none" }}>
+            <a className="link" href="#">
+              <CameraAltIcon onClick={change} />
+            </a>
+          </div>
         </div>
 
         {/* text input element */}

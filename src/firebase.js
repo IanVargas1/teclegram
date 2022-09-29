@@ -1,5 +1,5 @@
 import firebase from "firebase"
-
+import {v4} from 'uuid'
 const firebaseConfig = {
   apiKey: "AIzaSyALlrmHRONjmwMkN-6NvD7AH2rj6fz1luU",
   authDomain: "teclegram-40174.firebaseapp.com",
@@ -23,4 +23,21 @@ export { auth, googleProvider };
 
 export default db;
 
+export const storage = firebase.storage();
+
 export const deleteMessage = id => console.log('id: ',id);
+
+/**
+ * Upload a file to firebase storage
+ * @param {File} file the file to upload
+ * @returns {Promise<string>} url of the uploaded file
+ */
+
+export async function uploadFile(file){
+  const storageRef = storage.ref()
+  var idImg=v4()
+  const mountainsRef = storageRef.child('imagen/'+idImg);
+  await mountainsRef.put(file)
+  const url = await mountainsRef.getDownloadURL()
+  return url
+}
