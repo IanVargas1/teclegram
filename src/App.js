@@ -8,6 +8,8 @@ import { useState } from "react";
 import Login from "./Components/Login";
 import { auth } from "./firebase";
 import CalendarContainer from "./Components/CalendarContainer";
+import UploadVPage from "./Components/UploadVPage";
+import UploadAPage from "./Components/UploadAPage";
 function App() {
   /** routing for the pages */
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -43,6 +45,14 @@ function App() {
               element={
                 <CalendarContainer currentUser={user} signOut={signOut} />
               }
+            />
+            <Route
+              path="/uploadV/:emailID"
+              element={<UploadVPage currentUser={user} signOut={signOut} />}
+            />
+            <Route
+              path="/uploadA/:emailID"
+              element={<UploadAPage currentUser={user} signOut={signOut} />}
             />
           </Routes>
         ) : (

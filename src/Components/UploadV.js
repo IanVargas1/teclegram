@@ -6,15 +6,34 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Sidebar from "./Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import "./UploadV.css";
+import { v4 } from "uuid";
 
 function UploadV() {
   const [load, setLoad] = useState(false);
   const [file, setfile] = useState(null);
-  const {fileType,setFileType} = useState('');
+  const { fileType, setFileType } = useState("");
   const { emailID } = useParams();
   const navigate = useNavigate();
+
+  const loadingL = () => {
+    return (
+      <div className="loader">
+        <div>
+          <div></div>
+        </div>
+      </div>
+    );
+  };
+
   const changeS = (e) => {
     setLoad(e);
+    var x = document.getElementById("btnSendV").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +50,13 @@ function UploadV() {
 
   const change = (e) => {
     setfile(e.target.files[0]);
+    var x = document.getElementById("loadV").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
   };
 
   function hide() {
@@ -46,11 +72,13 @@ function UploadV() {
   const send = (e) => {
     e.preventDefault();
     if (emailID) {
+      var cod = v4();
       let playload = {
+        id: cod,
         text: load,
         senderEmail: auth?.currentUser?.email,
         reciverEmail: emailID,
-        type : 'video',
+        type: "video",
         timeStamp: firebase.firestore.Timestamp.now(),
       };
 
@@ -63,11 +91,11 @@ function UploadV() {
       //data to reciver
       db.collection("chats").doc(emailID).collection("messages").add(playload);
       console.log(emailID);
-    //   setFileType("video");
+      //   setFileType("video");
       if (emailID) {
         navigate(`/${emailID}`);
       }
-      
+
       db.collection("FriendList")
         .doc(auth?.currentUser?.email)
         .collection("list")
@@ -88,7 +116,12 @@ function UploadV() {
           photoURL: auth?.currentUser?.photoURL,
         });
     }
-    
+  };
+
+  const nav = () => {
+    if (emailID) {
+      navigate(`/${emailID}`);
+    }
   };
   return (
     <div className="chat-container">
@@ -104,24 +137,21 @@ function UploadV() {
                 onChange={change}
                 // style={{ display: "none" }}
               />
-              {/* <label htmlFor="loadImg"><CameraAltIcon/></label> */}
             </form>
             <hr />
 
-            {load ? <video controls src={load} /> : null}
+            {load ? (
+              <video
+                controls
+                className="preview-media"
+                src={load}
+                style={{ width: "400px" }}
+              />
+            ) : (
+              loadingL
+            )}
 
-            <div>
-              {/* <p>
-                {load ? (
-                  <video controls src={load} width="640" height="480"></video>
-                ) : (
-                  // <audio controls>
-                  //   <source src={load} type="audio/mp3"/>
-                  // </audio>
-                  <h1></h1>
-                )}
-              </p> */}
-            </div>
+            <div></div>
             <button
               style={{
                 borderRadius: "20px",
@@ -129,15 +159,30 @@ function UploadV() {
                 marginBottom: "10px",
                 marginRight: "20px",
               }}
+              onClick={nav}
+            >
+              cancel
+            </button>
+            <button
+              id="loadV"
+              style={{
+                borderRadius: "20px",
+                cursor: "pointer",
+                marginBottom: "10px",
+                marginRight: "20px",
+                display: "none",
+              }}
               onClick={handleSubmit}
             >
               Load Video
             </button>
             <button
+              id="btnSendV"
               style={{
                 borderRadius: "20px",
                 cursor: "pointer",
                 marginBottom: "10px",
+                display: "none",
               }}
               onClick={send}
             >

@@ -13,6 +13,8 @@ import firebase from "firebase";
 import { v4 } from "uuid";
 import { uploadFile } from "../firebase";
 import Upload from "./Upload";
+import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
+import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 function ChatContainer({ currentUser }) {
   const [message, setMessage] = useState("");
@@ -139,6 +141,12 @@ function ChatContainer({ currentUser }) {
     navigate(`/upload/${emailID}`);
   };
 
+  const changeV = () => {
+    navigate(`/uploadV/${emailID}`);
+  };
+  const changeA = () => {
+    navigate(`/uploadA/${emailID}`);
+  };
   return (
     <div className="chat-container">
       <div className="chat-container-header">
@@ -183,6 +191,12 @@ function ChatContainer({ currentUser }) {
           <div id="menu" className="menu" style={{ display: "none" }}>
             <a className="link" href="#">
               <CameraAltIcon onClick={change} />
+            </a>
+            <a className="link" href="#">
+              <VideoCameraFrontIcon onClick={changeV} />
+            </a>
+            <a className="link" href="#">
+              <AudiotrackIcon onClick={changeA} />
             </a>
           </div>
         </div>

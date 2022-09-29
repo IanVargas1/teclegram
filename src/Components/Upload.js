@@ -4,17 +4,24 @@ import { uploadFile } from "../firebase";
 import { useState } from "react";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Sidebar from "./Sidebar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Upload.css";
-
+import { v4 } from "uuid";
 function Upload() {
   const [load, setLoad] = useState(false);
   const [file, setfile] = useState(null);
-
+  const { fileType, setFileType } = useState("");
   const { emailID } = useParams();
-
+  const navigate = useNavigate();
   const changeS = (e) => {
     setLoad(e);
+    var x = document.getElementById("btnSendI").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +38,13 @@ function Upload() {
 
   const change = (e) => {
     setfile(e.target.files[0]);
+    var x = document.getElementById("loadI").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
   };
 
   function hide() {
@@ -46,13 +60,16 @@ function Upload() {
   const send = (e) => {
     e.preventDefault();
     if (emailID) {
+      var cod = v4();
       let playload = {
+        id: cod,
         text: load,
         senderEmail: auth?.currentUser?.email,
         reciverEmail: emailID,
+        type: "imagen",
         timeStamp: firebase.firestore.Timestamp.now(),
       };
-      console.log(playload);
+
       //data to the sender
       db.collection("chats")
         .doc(auth?.currentUser?.email)
@@ -61,7 +78,11 @@ function Upload() {
 
       //data to reciver
       db.collection("chats").doc(emailID).collection("messages").add(playload);
-
+      console.log(emailID);
+      // setFileType("");
+      if (emailID) {
+        navigate(`/${emailID}`);
+      }
       db.collection("FriendList")
         .doc(auth?.currentUser?.email)
         .collection("list")
@@ -70,7 +91,7 @@ function Upload() {
           email: chatUser.email,
           fullname: chatUser.fullname,
           photoURL: chatUser.photoURL,
-          lastMessage: "imagen",
+          lastMessage: "",
         });
 
       db.collection("FriendList")
@@ -81,10 +102,17 @@ function Upload() {
           email: auth?.currentUser?.email,
           fullname: auth?.currentUser?.fullname,
           photoURL: auth?.currentUser?.photoURL,
-          lastMessage: "imagen",
+          lastMessage: "",
         });
     }
   };
+
+  const nav = () => {
+    if (emailID) {
+      navigate(`/${emailID}`);
+    }
+  };
+
   return (
     <div className="chat-container">
       <div className="home-container">
@@ -95,7 +123,7 @@ function Upload() {
               <input
                 type="file"
                 id="loadImg"
-                accept=".png, .jpg, .jpge, .mp4, .mp3 "
+                accept=".png, .jpg, .jpge "
                 onChange={change}
                 // style={{ display: "none" }}
               />
@@ -103,20 +131,9 @@ function Upload() {
             </form>
             <hr />
 
-            {load ? <img src={load} /> : null}
+            {load ? <img className="preview-media" src={load} /> : null}
 
-            <div>
-              {/* <p>
-                {load ? (
-                  <video controls src={load} width="640" height="480"></video>
-                ) : (
-                  // <audio controls>
-                  //   <source src={load} type="audio/mp3"/>
-                  // </audio>
-                  <h1></h1>
-                )}
-              </p> */}
-            </div>
+            <div></div>
             <button
               style={{
                 borderRadius: "20px",
@@ -124,15 +141,30 @@ function Upload() {
                 marginBottom: "10px",
                 marginRight: "20px",
               }}
+              onClick={nav}
+            >
+              cancel
+            </button>
+            <button
+              id="loadI"
+              style={{
+                borderRadius: "20px",
+                cursor: "pointer",
+                marginBottom: "10px",
+                marginRight: "20px",
+                display: "none",
+              }}
               onClick={handleSubmit}
             >
               Load Image
             </button>
             <button
+              id="btnSendI"
               style={{
                 borderRadius: "20px",
                 cursor: "pointer",
                 marginBottom: "10px",
+                display: "none",
               }}
               onClick={send}
             >

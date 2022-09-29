@@ -6,15 +6,23 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Sidebar from "./Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import "./UploadA.css";
+import { v4 } from "uuid";
 
 function UploadA() {
   const [load, setLoad] = useState(false);
   const [file, setfile] = useState(null);
-  const {fileType,setFileType} = useState('');
+  const { fileType, setFileType } = useState("");
   const { emailID } = useParams();
   const navigate = useNavigate();
   const changeS = (e) => {
     setLoad(e);
+    var x = document.getElementById("btnSendA").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,13 +39,26 @@ function UploadA() {
 
   const change = (e) => {
     setfile(e.target.files[0]);
+    var x = document.getElementById("loadA").style;
+    console.log(x.display);
+    if (x.display === "none") {
+      x.display = "inline";
+    } else {
+      x.display = "none";
+    }
+  };
+
+  const nav = () => {
+    if (emailID) {
+      navigate(`/${emailID}`);
+    }
   };
 
   function hide() {
     var x = document.getElementById("menu").style;
     console.log(x.display);
     if (x.display === "none") {
-      x.display = "flex";
+      x.display = "inline";
     } else {
       x.display = "none";
     }
@@ -46,11 +67,13 @@ function UploadA() {
   const send = (e) => {
     e.preventDefault();
     if (emailID) {
+      var cod = v4();
       let playload = {
+        id: cod,
         text: load,
         senderEmail: auth?.currentUser?.email,
         reciverEmail: emailID,
-        type : 'audio',
+        type: "audio",
         timeStamp: firebase.firestore.Timestamp.now(),
       };
 
@@ -63,11 +86,11 @@ function UploadA() {
       //data to reciver
       db.collection("chats").doc(emailID).collection("messages").add(playload);
       console.log(emailID);
-    //   setFileType("video");
+      //   setFileType("video");
       if (emailID) {
         navigate(`/${emailID}`);
       }
-      
+
       db.collection("FriendList")
         .doc(auth?.currentUser?.email)
         .collection("list")
@@ -88,7 +111,6 @@ function UploadA() {
           photoURL: auth?.currentUser?.photoURL,
         });
     }
-    
   };
   return (
     <div className="chat-container">
@@ -100,7 +122,7 @@ function UploadA() {
               <input
                 type="file"
                 id="loadImg"
-                accept=".mp3, .wav, .wma, .aac"
+                accept="wav, .wma, .aac, .mp3, .m4a"
                 onChange={change}
                 // style={{ display: "none" }}
               />
@@ -108,7 +130,14 @@ function UploadA() {
             </form>
             <hr />
 
-            {load ? <audio src={load} /> : null}
+            {load ? (
+              <audio
+                controls
+                className="preview-media"
+                src={load}
+                style={{ width: "400px" }}
+              />
+            ) : null}
 
             <div>
               {/* <p>
@@ -129,15 +158,30 @@ function UploadA() {
                 marginBottom: "10px",
                 marginRight: "20px",
               }}
-              onClick={handleSubmit}
+              onClick={nav}
             >
-              Load Video
+              cancel
             </button>
             <button
+              id="loadA"
               style={{
                 borderRadius: "20px",
                 cursor: "pointer",
                 marginBottom: "10px",
+                marginRight: "20px",
+                display: "none",
+              }}
+              onClick={handleSubmit}
+            >
+              Load Audio
+            </button>
+            <button
+              id="btnSendA"
+              style={{
+                borderRadius: "20px",
+                cursor: "pointer",
+                marginBottom: "10px",
+                display: "none",
               }}
               onClick={send}
             >

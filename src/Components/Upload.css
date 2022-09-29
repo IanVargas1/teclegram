@@ -126,3 +126,8 @@
     background-color: #3ad7dabf;
     border: none;
 }
+
+.preview-media{
+    max-width: 80%;
+    max-height: 80%;
+}
